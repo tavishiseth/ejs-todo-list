@@ -2,10 +2,14 @@
 
 const express = require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js")
+
+console.log(date);
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 var items = ["Cook food", "Gym", "Read book"];
@@ -17,11 +21,11 @@ app.get("/", function(req, res){
 
   if (currentDay === 6 || currentDay === 0) {
     day = "Weekend";
-    res.sendFile(__dirname + "/weekend.html");
+    // res.sendFile(__dirname + "/weekend.html");
   }
   else {
     day = "Weekday";
-    res.sendFile(__dirname + "/weekday.html");
+    // res.sendFile(__dirname + "/weekday.html");
   }
   res.render("list", {KindofDay: day, newListitem: items});
 });
